@@ -12,47 +12,52 @@ import PageLoader from "../../components/PageLoader";
 import toast from "react-hot-toast";
 
 const Home = () => {
-	useTitle("EduCore - Enroll & Learn with Confidence");
+  useTitle("EduCore - Enroll & Learn with Confidence");
 
-	const [latestCourses, setLatestCourses] = useState([]);
-	const [popularCourses, setPopularCourses] = useState([]);
-	const [loading, setLoading] = useState(true);
+  const [latestCourses, setLatestCourses] = useState([]);
+  const [popularCourses, setPopularCourses] = useState([]);
+  const [loading, setLoading] = useState(true);
 
-	useEffect(() => {
-		const fetchCourses = async () => {
-			try {
-				setLoading(true);
-				const [latestRes, popularRes] = await Promise.all([
-					axios.get(`${import.meta.env.VITE_apiUrl}/courses?filter=recent&limit=6`),
-					axios.get(`${import.meta.env.VITE_apiUrl}/courses?filter=popular&limit=6`),
-				]);
-				setLatestCourses(latestRes.data);
-				setPopularCourses(popularRes.data);
-			} catch (error) {
-				toast.error("Error fetching courses:", error);
-			} finally {
-				setLoading(false);
-			}
-		};
+  useEffect(() => {
+    const fetchCourses = async () => {
+      try {
+        setLoading(true);
+        const [latestRes, popularRes] = await Promise.all([
+          axios.get(
+            `${import.meta.env.VITE_apiUrl}/courses?filter=recent&limit=6`
+          ),
+          axios.get(
+            `${import.meta.env.VITE_apiUrl}/courses?filter=popular&limit=6`
+          ),
+        ]);
+        setLatestCourses(latestRes.data);
+        setPopularCourses(popularRes.data);
+      } catch (error) {
+        toast.error("Error fetching courses:", error);
+      } finally {
+        setLoading(false);
+      }
+    };
 
-		fetchCourses();
-	}, []);
+    fetchCourses();
+  }, []);
 
-	if (loading) {
-		return <PageLoader />;
-	}
+  if (loading) {
+    return <PageLoader />;
+  }
 
-	return (
-		<>
-			<BannerSection></BannerSection>
-			<TrustedCompanies></TrustedCompanies>
-			<LatestCourses latestCourses={latestCourses}></LatestCourses>
-			<WhyLearnWithUs></WhyLearnWithUs>
-			<PopularCourses popularCourses={popularCourses}></PopularCourses>
-			<FeaturedCategories></FeaturedCategories>
-			<TestimonialCarousel></TestimonialCarousel>
-		</>
-	);
+  return (
+    <>
+      <BannerSection></BannerSection>
+
+      <LatestCourses latestCourses={latestCourses}></LatestCourses>
+      <WhyLearnWithUs></WhyLearnWithUs>
+      <PopularCourses popularCourses={popularCourses}></PopularCourses>
+      <FeaturedCategories></FeaturedCategories>
+      <TrustedCompanies></TrustedCompanies>
+      <TestimonialCarousel></TestimonialCarousel>
+    </>
+  );
 };
 
 export default Home;
