@@ -40,7 +40,7 @@ const Footer = () => {
             className="w-36 mb-5"
           />
           <p className="text-brand-gray5 mb-6 max-w-md">
-            EduCore is a modern online learning platform offering top-notch
+            EduCore is a modern online learning platform, offering top-notch
             courses, expert instructors, and flexible learning experiences to
             help you grow your career from anywhere.
           </p>
