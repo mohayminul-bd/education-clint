@@ -3,6 +3,7 @@ import useTitle from "../../hooks/useTitle";
 import toast from "react-hot-toast";
 import UseAuth from "../../hooks/useAuth";
 import axios from "axios";
+import { useNavigate } from "react-router";
 
 const categories = [
   "Computer Science",
@@ -17,6 +18,7 @@ const accessTypes = ["Lifetime Access", "1 Year Access", "Limited Access"];
 
 const AddCourse = () => {
   const { user } = UseAuth();
+  const navigate = useNavigate();
   const handleAddCourse = (e) => {
     e.preventDefault();
     const form = e.target;
@@ -61,6 +63,7 @@ const AddCourse = () => {
         if (result.insertedId) {
           toast.success("Course added successfully");
           form.reset();
+          navigate("/");
         }
       })
       .catch(function (error) {
