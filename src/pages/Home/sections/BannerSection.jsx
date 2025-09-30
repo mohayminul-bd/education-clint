@@ -31,11 +31,10 @@ const PrevArrow = (props) => {
 };
 const slides = [
   {
-    title: "Unlock Your Potential With EduCore",
+    title: "Unlock Your Potential With Education",
     subtitle:
       "Access top-rated courses in minutes. Trusted by learners and instructors for flexibility, quality content, and real-world skills.",
-    image:
-      "https://res.cloudinary.com/dyzszn177/image/upload/v1750014299/unlock-your-potential_csvzqf.jpg",
+    image: "https://i.ibb.co.com/8nkcFjdL/istock-151597880.jpg",
     buttonText: "Browse Courses",
     buttonLink: "/courses",
   },
@@ -44,14 +43,14 @@ const slides = [
     subtitle:
       "Build your skills without barriers. Loved by developers, students and career changers for depth, clarity and affordability.",
     image:
-      "https://res.cloudinary.com/dyzszn177/image/upload/v1750002020/smart-courses-designed-for-success_jyfmqv.jpg",
+      "https://i.ibb.co.com/xKL9DcHj/How-Higher-Education-Is-Becoming-Increasingly-Irrelevant.png",
     buttonText: "Start Learning Now",
     buttonLink: "/courses",
   },
   {
     title: "Learn Skills That Shape Futures.",
     subtitle:
-      "Manage your learning with ease. EduCore is chosen for simplicity, progress tracking and seamless course experience.",
+      "Manage your learning with ease. Education is chosen for simplicity, progress tracking and seamless course experience.",
     image:
       "https://res.cloudinary.com/dyzszn177/image/upload/v1750002019/learn-skills-that-shape-futures_y1wnnf.jpg",
     buttonText: "Join EduCore Today",
