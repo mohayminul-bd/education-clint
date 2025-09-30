@@ -187,7 +187,7 @@ const CourseDetails = () => {
                 disabled
                 className="bg-gray-300 text-gray-600 w-full p-3 rounded-md font-medium cursor-not-allowed"
               >
-                Please login to enroll
+                Please login to enroll!
               </button>
             ) : seatLeft <= 0 ? (
               enrolled ? (
