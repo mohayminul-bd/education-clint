@@ -135,7 +135,7 @@ const Navbar = () => {
           </div>
           <Link className="md:w-45 w-30" to="/">
             <img
-              className="md:w-45 w-30"
+              className="md:w-45 w-30 rounded-2xl"
               src={logoImg}
               alt="EduCare official logo"
             />
