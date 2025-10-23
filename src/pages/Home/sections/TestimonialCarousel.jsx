@@ -1,4 +1,4 @@
-import React, { useEffect } from "react";
+import React, { useContext, useEffect } from "react";
 import Slider from "react-slick";
 import { FaStar } from "react-icons/fa";
 import { GrPrevious, GrNext } from "react-icons/gr";
@@ -6,6 +6,7 @@ import AOS from "aos";
 import "aos/dist/aos.css";
 import "slick-carousel/slick/slick.css";
 import "slick-carousel/slick/slick-theme.css";
+import { AuthContext } from "../../../contexts/auth/AuthContext";
 
 const testimonials = [
   {
@@ -68,6 +69,7 @@ const SamplePrevArrow = (props) => {
 };
 
 const TestimonialCarousel = () => {
+  const { darkMode } = useContext(AuthContext);
   useEffect(() => {
     AOS.init({ duration: 1000, once: true });
   }, []);
@@ -99,7 +101,7 @@ const TestimonialCarousel = () => {
   };
 
   return (
-    <section className="testimonial bg-white pt-12 pb-6 lg:py-20 px-4 relative">
+    <section className="testimonial  pb-5 md:pb-10  relative">
       <h2
         className="text-center font-semibold text-brand-blue mb-2"
         data-aos="fade-down"
@@ -107,7 +109,7 @@ const TestimonialCarousel = () => {
         Student Testimonials
       </h2>
       <p
-        className="text-center text-brand-black1 font-semibold text-xl lg:text-[40px] mb-4 lg:mb-6"
+        className="text-center text-brand-blue font-semibold text-xl lg:text-[40px] mb-4 lg:mb-6"
         data-aos="fade-up"
       >
         What Our Learners Say
@@ -121,12 +123,16 @@ const TestimonialCarousel = () => {
               data-aos="zoom-in"
               data-aos-delay={i * 150}
             >
-              <div className="h-full w-full bg-white rounded-xl p-6 border border-gray-200 flex flex-col justify-between text-center md:text-left hover:shadow-xl hover:scale-105 transition-transform duration-300">
+              <div
+                className={`h-full w-full   p-6 border border-gray-100 flex flex-col justify-between text-center md:text-left hover:shadow-xl hover:scale-105 transition-transform duration-300 ${
+                  darkMode
+                    ? " bg-gradient-to-r from-gray-800 via-gray-700 to-gray-600 shadow-md rounded-lg text-white"
+                    : "bg-base-100 text-black"
+                }`}
+              >
                 <div>
-                  <h3 className="font-semibold text-lg text-gray-800 mb-4">
-                    {item.title}
-                  </h3>
-                  <p className="text-gray-600 text-base mb-4">
+                  <h3 className="font-semibold text-lg  mb-4">{item.title}</h3>
+                  <p className="text-gray-500 text-base mb-4">
                     "{item.message}"
                   </p>
                 </div>
@@ -137,9 +143,7 @@ const TestimonialCarousel = () => {
                     className="w-12 h-12 rounded-full object-cover"
                   />
                   <div>
-                    <p className="font-semibold text-gray-800 mb-1">
-                      {item.name}
-                    </p>
+                    <p className="font-semibold  mb-1">{item.name}</p>
                     <div className="flex text-yellow-400 gap-1">
                       {Array.from({ length: 5 }).map((_, idx) => (
                         <FaStar key={idx} />

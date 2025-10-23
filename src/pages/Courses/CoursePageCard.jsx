@@ -1,8 +1,10 @@
 import dayjs from "dayjs";
-import React from "react";
+import React, { useContext } from "react";
 import { FaGraduationCap } from "react-icons/fa6";
 import { Link } from "react-router";
+import { AuthContext } from "../../contexts/auth/AuthContext";
 const CoursePageCard = ({ course }) => {
+  const { darkMode } = useContext(AuthContext);
   const {
     _id,
     title,
@@ -15,7 +17,11 @@ const CoursePageCard = ({ course }) => {
   } = course;
   return (
     <div
-      className="border border-brand-gray2 p-4 md:p-6 rounded-xl"
+      className={`border border-brand-gray2 p-4 md:p-6 rounded-xl ${
+        darkMode
+          ? " bg-gradient-to-r from-gray-800 via-gray-700 to-gray-600 shadow-md rounded-lg text-white"
+          : "bg-base-100 text-black"
+      }`}
       style={{
         transition: "box-shadow 0.3s ease",
       }}

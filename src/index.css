@@ -1,17 +1,18 @@
-@import url('https://fonts.googleapis.com/css2?family=Inter:ital,opsz,wght@0,14..32,100..900;1,14..32,100..900&display=swap');
+@import url("https://fonts.googleapis.com/css2?family=Inter:ital,opsz,wght@0,14..32,100..900;1,14..32,100..900&display=swap");
 @import "tailwindcss";
-@plugin "daisyui";
-
+@plugin "daisyui" {
+  themes: light --default, dark;
+}
 
 @theme {
   --font-inter: "Inter", sans-serif;
-  --color-brand-blue: #0166FF;
+  --color-brand-blue: #0166ff;
   --color-brand-black1: #010101;
-  --color-brand-black2: #292C3F;
+  --color-brand-black2: #292c3f;
   --color-brand-gray1: #707070;
-  --color-brand-gray2: #F2F2F2;
-  --color-brand-gray3: #F5F5F5;
-  --color-brand-gray4: #4F5A5A;
+  --color-brand-gray2: #f2f2f2;
+  --color-brand-gray3: #f5f5f5;
+  --color-brand-gray4: #4f5a5a;
   --color-brand-gray5: #717171;
   --color-brand-gray6: #cfcfcf;
 }
@@ -22,9 +23,7 @@
       max-width: 1280px;
     }
   }
-
 }
-
 
 body {
   font-family: var(--font-inter);
@@ -34,7 +33,7 @@ ul.menu-horizontal .active {
   color: black;
 }
 
-.testimonial .slick-slide>div {
+.testimonial .slick-slide > div {
   display: flex !important;
   height: 100% !important;
 }

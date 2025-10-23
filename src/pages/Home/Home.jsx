@@ -50,12 +50,14 @@ const Home = () => {
     <>
       <BannerSection></BannerSection>
 
-      <LatestCourses latestCourses={latestCourses}></LatestCourses>
-      <WhyLearnWithUs></WhyLearnWithUs>
-      <PopularCourses popularCourses={popularCourses}></PopularCourses>
-      <FeaturedCategories></FeaturedCategories>
-      <TrustedCompanies></TrustedCompanies>
-      <TestimonialCarousel></TestimonialCarousel>
+      <div className="md:px-12 px-3">
+        <LatestCourses latestCourses={latestCourses}></LatestCourses>
+        <WhyLearnWithUs></WhyLearnWithUs>
+        <PopularCourses popularCourses={popularCourses}></PopularCourses>
+        <FeaturedCategories></FeaturedCategories>
+        <TrustedCompanies></TrustedCompanies>
+        <TestimonialCarousel></TestimonialCarousel>
+      </div>
     </>
   );
 };

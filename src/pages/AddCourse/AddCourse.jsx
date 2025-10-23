@@ -1,9 +1,10 @@
-import React from "react";
+import React, { useContext } from "react";
 import useTitle from "../../hooks/useTitle";
 import toast from "react-hot-toast";
 import UseAuth from "../../hooks/useAuth";
 import axios from "axios";
 import { useNavigate } from "react-router";
+import { AuthContext } from "../../contexts/auth/AuthContext";
 
 const categories = [
   "Computer Science",
@@ -17,6 +18,7 @@ const levels = ["Beginner", "Intermediate", "Advanced"];
 const accessTypes = ["Lifetime Access", "1 Year Access", "Limited Access"];
 
 const AddCourse = () => {
+  const { darkMode } = useContext(AuthContext);
   const { user } = UseAuth();
   const navigate = useNavigate();
   const handleAddCourse = (e) => {
@@ -73,7 +75,13 @@ const AddCourse = () => {
   useTitle("Add a New Course | EduCore Learning Platform");
   return (
     <>
-      <div className="bg-brand-blue pt-12 pb-52 px-4">
+      <div
+        className={`bg-brand-blue pt-12 pb-52 px-4 ${
+          darkMode
+            ? " bg-gradient-to-r from-gray-800  to-gray-800 shadow-md rounded-lg text-white"
+            : "bg-base-100 text-black"
+        }`}
+      >
         <div className="container mx-auto">
           <h2 className="text-3xl font-bold text-white mb-2">
             Add a New Course
@@ -81,8 +89,14 @@ const AddCourse = () => {
         </div>
       </div>
       <div className="-mt-48 mb-10 lg:mb-20 px-4">
-        <div className="container mx-auto bg-white rounded-2xl p-6 lg:p-8 shadow-lg shadow-brand-black1/10">
-          <h3 className="text-xl font-semibold text-gray-700 mb-6 text-center">
+        <div
+          className={`container mx-auto  rounded-2xl p-6 lg:p-8 shadow-lg shadow-brand-black1/10  ${
+            darkMode
+              ? " bg-gradient-to-r from-gray-900  to-gray-900 shadow-lg rounded-lg text-white"
+              : "bg-base-100 text-black"
+          }`}
+        >
+          <h3 className="text-xl font-semibold  mb-6 text-center">
             Provide All Course Details Accurately Before Submission
           </h3>
 
@@ -92,53 +106,69 @@ const AddCourse = () => {
                 type="text"
                 name="title"
                 placeholder="Course Title *"
-                className="w-full px-4 py-3 bg-gray-50 rounded-md border border-gray-200 focus:outline-none focus:ring-2 focus:ring-blue-400"
+                className={`w-full px-4 py-3  rounded-md border border-gray-200 focus:outline-none focus:ring-2 focus:ring-blue-400 ${
+                  darkMode ? " bg-gray-800" : "bg-gray-50"
+                }`}
                 required
               />
               <input
                 type="number"
                 name="price"
                 placeholder="Price (USD) *"
-                className="w-full px-4 py-3 bg-gray-50 rounded-md border border-gray-200 focus:outline-none focus:ring-2 focus:ring-blue-400"
+                className={`w-full px-4 py-3  rounded-md border border-gray-200 focus:outline-none focus:ring-2 focus:ring-blue-400 ${
+                  darkMode ? " bg-gray-800" : "bg-gray-50"
+                }`}
                 required
               />
               <input
                 type="text"
                 name="duration"
                 placeholder="Duration (e.g., 6h 30min)"
-                className="w-full px-4 py-3 bg-gray-50 rounded-md border border-gray-200 focus:outline-none focus:ring-2 focus:ring-blue-400"
+                className={`w-full px-4 py-3  rounded-md border border-gray-200 focus:outline-none focus:ring-2 focus:ring-blue-400 ${
+                  darkMode ? " bg-gray-800" : "bg-gray-50"
+                }`}
               />
               <input
                 type="number"
                 name="totalVideos"
                 placeholder="Total Videos *"
-                className="w-full px-4 py-3 bg-gray-50 rounded-md border border-gray-200 focus:outline-none focus:ring-2 focus:ring-blue-400"
+                className={`w-full px-4 py-3  rounded-md border border-gray-200 focus:outline-none focus:ring-2 focus:ring-blue-400 ${
+                  darkMode ? " bg-gray-800" : "bg-gray-50"
+                }`}
               />
               <input
                 type="number"
                 name="totalLessons"
                 placeholder="Total Lessons *"
-                className="w-full px-4 py-3 bg-gray-50 rounded-md border border-gray-200 focus:outline-none focus:ring-2 focus:ring-blue-400"
+                className={`w-full px-4 py-3  rounded-md border border-gray-200 focus:outline-none focus:ring-2 focus:ring-blue-400 ${
+                  darkMode ? " bg-gray-800" : "bg-gray-50"
+                }`}
               />
               <input
                 type="url"
                 name="image"
                 placeholder="Image URL *"
-                className="w-full px-4 py-3 bg-gray-50 rounded-md border border-gray-200 focus:outline-none focus:ring-2 focus:ring-blue-400"
+                className={`w-full px-4 py-3  rounded-md border border-gray-200 focus:outline-none focus:ring-2 focus:ring-blue-400 ${
+                  darkMode ? " bg-gray-800" : "bg-gray-50"
+                }`}
                 required
               />
               <input
                 type="number"
                 name="seats"
                 placeholder="Enter total number of seats"
-                className="w-full px-4 py-3 bg-gray-50 rounded-md border border-gray-200 focus:outline-none focus:ring-2 focus:ring-blue-400"
+                className={`w-full px-4 py-3  rounded-md border border-gray-200 focus:outline-none focus:ring-2 focus:ring-blue-400 ${
+                  darkMode ? " bg-gray-800" : "bg-gray-50"
+                }`}
                 required
               />
               <select
                 required
                 defaultValue=""
                 name="category"
-                className="w-full px-4 py-3 bg-gray-50 rounded-md border border-gray-200 text-gray-700 focus:outline-none focus:ring-2 focus:ring-blue-400"
+                className={`w-full px-4 py-3  rounded-md border border-gray-200 focus:outline-none focus:ring-2 focus:ring-blue-400 ${
+                  darkMode ? " bg-gray-800" : "bg-gray-50"
+                }`}
               >
                 <option value="" disabled>
                   Select Category *
@@ -154,7 +184,9 @@ const AddCourse = () => {
                 required
                 defaultValue=""
                 name="level"
-                className="w-full px-4 py-3 bg-gray-50 rounded-md border border-gray-200 text-gray-700 focus:outline-none focus:ring-2 focus:ring-blue-400"
+                className={`w-full px-4 py-3  rounded-md border border-gray-200 focus:outline-none focus:ring-2 focus:ring-blue-400 ${
+                  darkMode ? " bg-gray-800" : "bg-gray-50"
+                }`}
               >
                 <option value="" disabled>
                   Select Level *
@@ -170,7 +202,9 @@ const AddCourse = () => {
                 required
                 defaultValue=""
                 name="accessType"
-                className="w-full px-4 py-3 bg-gray-50 rounded-md border border-gray-200 text-gray-700 focus:outline-none focus:ring-2 focus:ring-blue-400"
+                className={`w-full px-4 py-3  rounded-md border border-gray-200 focus:outline-none focus:ring-2 focus:ring-blue-400 ${
+                  darkMode ? " bg-gray-800" : "bg-gray-50"
+                }`}
               >
                 <option value="" disabled>
                   Select Access Type *
@@ -187,7 +221,9 @@ const AddCourse = () => {
               name="description"
               placeholder="Course Description *"
               required
-              className="w-full px-4 py-3 mb-4 bg-gray-50 rounded-md border border-gray-200 focus:outline-none focus:ring-2 focus:ring-blue-400"
+              className={`w-full px-4 py-3  rounded-md border border-gray-200 focus:outline-none focus:ring-2 focus:ring-blue-400 ${
+                darkMode ? " bg-gray-800" : "bg-gray-50"
+              }`}
             ></textarea>
 
             <button

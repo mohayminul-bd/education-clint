@@ -1,4 +1,4 @@
-import React, { useEffect } from "react";
+import React, { useContext, useEffect } from "react";
 import {
   FaCode,
   FaChartLine,
@@ -11,6 +11,7 @@ import {
 } from "react-icons/fa";
 import AOS from "aos";
 import "aos/dist/aos.css";
+import { AuthContext } from "../../../contexts/auth/AuthContext";
 
 const categories = [
   {
@@ -56,12 +57,13 @@ const categories = [
 ];
 
 const FeaturedCategories = () => {
+  const { darkMode } = useContext(AuthContext);
   useEffect(() => {
     AOS.init({ duration: 1000, once: true });
   }, []);
 
   return (
-    <section className="bg-brand-gray3 py-12 lg:py-20 px-4">
+    <section className=" py-12 lg:py-20">
       <h2
         className="text-center font-semibold text-brand-blue mb-2"
         data-aos="fade-down"
@@ -69,22 +71,26 @@ const FeaturedCategories = () => {
         Popular Categories
       </h2>
       <p
-        className="text-center text-brand-black1 font-semibold text-xl lg:text-[40px] mb-6 lg:mb-12"
+        className="text-center text-brand-blue font-semibold text-xl lg:text-[40px] mb-6 lg:mb-12"
         data-aos="fade-up"
       >
         Explore Trending Topics
       </p>
 
-      <div className="grid grid-cols-1 sm:grid-cols-2 md:grid-cols-4 gap-6 max-w-6xl mx-auto">
+      <div className="grid grid-cols-1 sm:grid-cols-2 md:grid-cols-4 gap-6  mx-auto">
         {categories.map((item, idx) => (
           <div
             key={idx}
-            className="flex flex-col items-start gap-3 bg-white p-6 rounded-xl shadow-sm border border-brand-gray2 hover:shadow-xl hover:scale-105 transition-transform duration-300"
+            className={`flex flex-col items-start gap-3  p-6 rounded-xl shadow-sm border border-brand-gray2 hover:shadow-xl hover:scale-105 transition-transform duration-300 ${
+              darkMode
+                ? " bg-gradient-to-r from-gray-800 via-gray-700 to-gray-600 shadow-md rounded-lg text-white"
+                : "bg-base-100 text-black"
+            }`}
             data-aos="zoom-in"
             data-aos-delay={idx * 100}
           >
             <div className="text-3xl text-brand-blue">{item.icon}</div>
-            <h3 className="text-lg font-semibold text-gray-800">{item.name}</h3>
+            <h3 className="text-lg font-semibold ">{item.name}</h3>
             <p className="text-sm text-gray-500">{item.desc}</p>
           </div>
         ))}

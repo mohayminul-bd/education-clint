@@ -1,20 +1,38 @@
-import React from "react";
+import React, { useContext } from "react";
 import useTitle from "../../hooks/useTitle";
+import { AuthContext } from "../../contexts/auth/AuthContext";
 
 const HowItWorks = () => {
   useTitle("How It Works | EduCore Learning Platform");
+  const { darkMode } = useContext(AuthContext);
+
   return (
     <>
-      <div className="bg-brand-blue py-12 px-4">
-        <div className="container mx-auto">
-          <h2 className="text-3xl font-bold text-white mb-2">
+      {/* Header Section */}
+      <div
+        className={`py-12 px-4 transition duration-300 ${
+          darkMode ? "bg-gray-800" : "bg-brand-blue"
+        }`}
+      >
+        <div className="container mx-auto text-center">
+          <h2 className="text-3xl md:text-4xl font-bold text-white mb-2">
             How EduCore Works
           </h2>
+          <p className="text-white/90 text-sm md:text-base">
+            Learn how our platform helps you master skills efficiently
+          </p>
         </div>
       </div>
 
-      <div className="xl:py-15 py-10 px-4">
-        <div className="container mx-auto bg-white rounded-2xl space-y-6 text-gray-700 text-base leading-relaxed">
+      {/* Main Content Section */}
+      <div className="xl:py-16 py-10 px-4 flex justify-center">
+        <div
+          className={`max-w-4xl w-full rounded-2xl shadow-lg p-6 md:p-10 space-y-6 transition duration-300 ${
+            darkMode
+              ? "bg-gradient-to-r from-gray-800  to-gray-800 text-white"
+              : "bg-white text-gray-700"
+          }`}
+        >
           <p>
             Getting started with <strong>EduCore</strong> is quick, simple, and
             designed for learners of all levels. Our platform ensures that you
@@ -28,7 +46,7 @@ const HowItWorks = () => {
             effective. Here’s how it works:
           </p>
 
-          <ul className="list-disc list-inside space-y-1">
+          <ul className="list-disc list-inside space-y-2 pl-2">
             <li>
               <strong>1. Explore Courses:</strong> Discover a wide range of
               courses organized by skill level, industry, and topic.

@@ -1,4 +1,4 @@
-import React, { useEffect, useState } from "react";
+import React, { useContext, useEffect, useState } from "react";
 import { FaRegBookmark, FaStar } from "react-icons/fa";
 import { FiBarChart } from "react-icons/fi";
 import { AiFillClockCircle } from "react-icons/ai";
@@ -12,8 +12,10 @@ import PageLoader from "../../components/PageLoader";
 import toast from "react-hot-toast";
 import dayjs from "dayjs";
 import { LuCalendarPlus } from "react-icons/lu";
+import { AuthContext } from "../../contexts/auth/AuthContext";
 
 const CourseDetails = () => {
+  const { darkMode } = useContext(AuthContext);
   const [recentCourses, setRecentCourses] = useState([]);
   const [loading, setLoading] = useState(true);
   const [enrolled, setEnrolled] = useState(false);
@@ -135,7 +137,13 @@ const CourseDetails = () => {
   return (
     <>
       {/* Hero Section */}
-      <div className="bg-gradient-to-r from-indigo-600 via-blue-600 to-cyan-500 py-16 px-6">
+      <div
+        className={`bg-gradient-to-r  py-16 px-6 ${
+          darkMode
+            ? "  shadow-md rounded-lg text-white"
+            : "bg-gradient-to-r from-indigo-600 via-blue-600 to-cyan-500 text-black"
+        }`}
+      >
         <div className="container mx-auto flex flex-col md:flex-row justify-between items-center gap-10">
           {/* Left side */}
           <div className="md:w-[560px] text-white">
@@ -175,7 +183,13 @@ const CourseDetails = () => {
           </div>
 
           {/* Right side */}
-          <div className="md:w-[320px] bg-white rounded-2xl shadow-lg p-6">
+          <div
+            className={`md:w-[320px]  rounded-2xl shadow-lg p-6 ${
+              darkMode
+                ? " bg-gradient-to-r from-gray-800 via-gray-700 to-gray-600 shadow-md rounded-lg text-white"
+                : "bg-base-100 text-black"
+            }`}
+          >
             <h3 className="text-2xl mb-3 font-semibold">Get the course</h3>
             <p className="text-xl font-semibold mb-5 text-indigo-700">
               $ {price} USD
@@ -230,7 +244,13 @@ const CourseDetails = () => {
             </p>
 
             {/* Course Meta */}
-            <div className="space-y-3 mt-5 pt-5 border-t border-gray-200">
+            <div
+              className={`space-y-3 mt-5 pt-5 border-t ${
+                darkMode
+                  ? " bg-gradient-to-r from-gray-800 via-gray-700 to-gray-600 shadow-md rounded-lg text-white"
+                  : "bg-base-100 text-black"
+              }`}
+            >
               <div className="flex items-center gap-3">
                 <FiBarChart className="text-indigo-600" />
                 <p>Level: {level}</p>

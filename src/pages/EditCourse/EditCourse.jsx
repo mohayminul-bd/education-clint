@@ -1,10 +1,11 @@
-import React, { useEffect, useState } from "react";
+import React, { useContext, useEffect, useState } from "react";
 import useTitle from "../../hooks/useTitle";
 import UseAuth from "../../hooks/useAuth";
 import { useNavigate, useParams } from "react-router";
 import axios from "axios";
 import PageLoader from "../../components/PageLoader";
 import toast from "react-hot-toast";
+import { AuthContext } from "../../contexts/auth/AuthContext";
 
 const categories = [
   "Computer Science",
@@ -18,6 +19,8 @@ const levels = ["Beginner", "Intermediate", "Advanced"];
 const accessTypes = ["Lifetime Access", "1 Year Access", "Limited Access"];
 
 const EditCourse = () => {
+  const { darkMode } = useContext(AuthContext);
+
   const { user } = UseAuth();
   const { id } = useParams();
   const navigate = useNavigate();
@@ -133,7 +136,13 @@ const EditCourse = () => {
   return (
     <>
       {/* Hero Section */}
-      <div className="bg-gradient-to-r from-indigo-600 to-blue-500 pt-12 pb-40 px-4">
+      <div
+        className={`bg-brand-blue pt-12 pb-52 px-4 ${
+          darkMode
+            ? " bg-gradient-to-r from-gray-800  to-gray-800 shadow-md rounded-lg text-white"
+            : "bg-base-100 text-black"
+        }`}
+      >
         <div className="container mx-auto">
           <h2 className="text-3xl font-bold text-white mb-2">
             Edit Course Details
@@ -143,8 +152,14 @@ const EditCourse = () => {
 
       {/* Form Section */}
       <div className="-mt-36 mb-10 lg:mb-20 px-4">
-        <div className="container mx-auto bg-white rounded-2xl p-8 shadow-xl">
-          <h3 className="text-xl font-semibold text-gray-700 mb-6 text-center">
+        <div
+          className={`container mx-auto  rounded-2xl p-6 lg:p-8 shadow-lg shadow-brand-black1/10  ${
+            darkMode
+              ? " bg-gradient-to-r from-gray-900  to-gray-900 shadow-lg rounded-lg text-white"
+              : "bg-base-100 text-black"
+          }`}
+        >
+          <h3 className="text-xl font-semibold  mb-6 text-center">
             Update the necessary fields below and save your changes
           </h3>
 
@@ -157,9 +172,9 @@ const EditCourse = () => {
                   type="text"
                   defaultValue={title}
                   placeholder="Course Title *"
-                  className={`w-full px-4 py-3 rounded-md border ${
-                    errors.title ? "border-red-500" : "border-gray-200"
-                  } bg-gray-50 focus:outline-none focus:ring-2 focus:ring-indigo-400`}
+                  className={`w-full px-4 py-3  rounded-md border border-gray-200 focus:outline-none focus:ring-2 focus:ring-blue-400 ${
+                    darkMode ? " bg-gray-800" : "bg-gray-50"
+                  }`}
                 />
                 {errors.title && (
                   <p className="text-red-500 text-sm mt-1">{errors.title}</p>
@@ -173,9 +188,9 @@ const EditCourse = () => {
                   type="number"
                   defaultValue={price}
                   placeholder="Price (USD) *"
-                  className={`w-full px-4 py-3 rounded-md border ${
-                    errors.price ? "border-red-500" : "border-gray-200"
-                  } bg-gray-50 focus:outline-none focus:ring-2 focus:ring-indigo-400`}
+                  className={`w-full px-4 py-3  rounded-md border border-gray-200 focus:outline-none focus:ring-2 focus:ring-blue-400 ${
+                    darkMode ? " bg-gray-800" : "bg-gray-50"
+                  }`}
                 />
                 {errors.price && (
                   <p className="text-red-500 text-sm mt-1">{errors.price}</p>
@@ -188,7 +203,9 @@ const EditCourse = () => {
                 type="text"
                 defaultValue={duration}
                 placeholder="Duration (e.g., 6h 30min)"
-                className="w-full px-4 py-3 rounded-md border border-gray-200 bg-gray-50 focus:outline-none focus:ring-2 focus:ring-indigo-400"
+                className={`w-full px-4 py-3  rounded-md border border-gray-200 focus:outline-none focus:ring-2 focus:ring-blue-400 ${
+                  darkMode ? " bg-gray-800" : "bg-gray-50"
+                }`}
               />
 
               {/* Total Videos */}
@@ -197,7 +214,9 @@ const EditCourse = () => {
                 type="number"
                 defaultValue={totalVideos}
                 placeholder="Total Videos *"
-                className="w-full px-4 py-3 rounded-md border border-gray-200 bg-gray-50 focus:outline-none focus:ring-2 focus:ring-indigo-400"
+                className={`w-full px-4 py-3  rounded-md border border-gray-200 focus:outline-none focus:ring-2 focus:ring-blue-400 ${
+                  darkMode ? " bg-gray-800" : "bg-gray-50"
+                }`}
               />
 
               {/* Total Lessons */}
@@ -206,7 +225,9 @@ const EditCourse = () => {
                 type="number"
                 defaultValue={totalLessons}
                 placeholder="Total Lessons *"
-                className="w-full px-4 py-3 rounded-md border border-gray-200 bg-gray-50 focus:outline-none focus:ring-2 focus:ring-indigo-400"
+                className={`w-full px-4 py-3  rounded-md border border-gray-200 focus:outline-none focus:ring-2 focus:ring-blue-400 ${
+                  darkMode ? " bg-gray-800" : "bg-gray-50"
+                }`}
               />
 
               {/* Image */}
@@ -216,9 +237,9 @@ const EditCourse = () => {
                   type="url"
                   defaultValue={image}
                   placeholder="Image URL *"
-                  className={`w-full px-4 py-3 rounded-md border ${
-                    errors.image ? "border-red-500" : "border-gray-200"
-                  } bg-gray-50 focus:outline-none focus:ring-2 focus:ring-indigo-400`}
+                  className={`w-full px-4 py-3  rounded-md border border-gray-200 focus:outline-none focus:ring-2 focus:ring-blue-400 ${
+                    darkMode ? " bg-gray-800" : "bg-gray-50"
+                  }`}
                 />
                 {errors.image && (
                   <p className="text-red-500 text-sm mt-1">{errors.image}</p>
@@ -232,9 +253,9 @@ const EditCourse = () => {
                   type="number"
                   defaultValue={seats}
                   placeholder="Enter total number of seats"
-                  className={`w-full px-4 py-3 rounded-md border ${
-                    errors.seats ? "border-red-500" : "border-gray-200"
-                  } bg-gray-50 focus:outline-none focus:ring-2 focus:ring-indigo-400`}
+                  className={`w-full px-4 py-3  rounded-md border border-gray-200 focus:outline-none focus:ring-2 focus:ring-blue-400 ${
+                    darkMode ? " bg-gray-800" : "bg-gray-50"
+                  }`}
                 />
                 {errors.seats && (
                   <p className="text-red-500 text-sm mt-1">{errors.seats}</p>
@@ -245,7 +266,9 @@ const EditCourse = () => {
               <select
                 name="category"
                 defaultValue={category}
-                className="w-full px-4 py-3 rounded-md border border-gray-200 bg-gray-50 focus:outline-none focus:ring-2 focus:ring-indigo-400"
+                className={`w-full px-4 py-3  rounded-md border border-gray-200 focus:outline-none focus:ring-2 focus:ring-blue-400 ${
+                  darkMode ? " bg-gray-800" : "bg-gray-50"
+                }`}
               >
                 <option value="" disabled>
                   Select Category *
@@ -261,7 +284,9 @@ const EditCourse = () => {
               <select
                 name="level"
                 defaultValue={level}
-                className="w-full px-4 py-3 rounded-md border border-gray-200 bg-gray-50 focus:outline-none focus:ring-2 focus:ring-indigo-400"
+                className={`w-full px-4 py-3  rounded-md border border-gray-200 focus:outline-none focus:ring-2 focus:ring-blue-400 ${
+                  darkMode ? " bg-gray-800" : "bg-gray-50"
+                }`}
               >
                 <option value="" disabled>
                   Select Level *
@@ -277,7 +302,9 @@ const EditCourse = () => {
               <select
                 name="accessType"
                 defaultValue={accessType}
-                className="w-full px-4 py-3 rounded-md border border-gray-200 bg-gray-50 focus:outline-none focus:ring-2 focus:ring-indigo-400"
+                className={`w-full px-4 py-3  rounded-md border border-gray-200 focus:outline-none focus:ring-2 focus:ring-blue-400 ${
+                  darkMode ? " bg-gray-800" : "bg-gray-50"
+                }`}
               >
                 <option value="" disabled>
                   Select Access Type *
@@ -296,9 +323,9 @@ const EditCourse = () => {
               rows="4"
               defaultValue={description}
               placeholder="Course Description *"
-              className={`w-full px-4 py-3 rounded-md border ${
-                errors.description ? "border-red-500" : "border-gray-200"
-              } bg-gray-50 focus:outline-none focus:ring-2 focus:ring-indigo-400`}
+              className={`w-full px-4 py-3  rounded-md border border-gray-200 focus:outline-none focus:ring-2 focus:ring-blue-400 ${
+                darkMode ? " bg-gray-800" : "bg-gray-50"
+              }`}
             ></textarea>
             {errors.description && (
               <p className="text-red-500 text-sm mt-1">{errors.description}</p>

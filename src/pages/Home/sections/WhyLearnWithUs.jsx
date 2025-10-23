@@ -45,11 +45,7 @@ const WhyLearnWithUs = () => {
   ];
 
   return (
-    <section className="relative py-12 lg:py-20 overflow-hidden px-4 bg-brand-black1/10">
-      {/* Background Glow Effects */}
-      <div className="absolute top-0 left-0 w-[400px] h-[300px] rounded-[276px] bg-[#A6CF4A99] blur-[250px] -z-10"></div>
-      <div className="absolute top-0 right-0 w-[400px] h-[300px] rounded-[276px] bg-[#FF60A899] blur-[250px] -z-10"></div>
-
+    <section className="relative py-5 lg:py-5 overflow-hidden  ">
       <div className="container mx-auto">
         {/* Section Heading */}
         <h2
@@ -59,7 +55,7 @@ const WhyLearnWithUs = () => {
           Why Choose Us
         </h2>
         <p
-          className="text-center text-brand-black1 font-bold text-2xl lg:text-[40px] mb-10 lg:mb-14"
+          className="text-center text-brand-blue font-bold text-2xl lg:text-[40px] mb-10 lg:mb-14"
           data-aos="fade-up"
           data-aos-delay="200"
         >

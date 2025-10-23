@@ -5,11 +5,11 @@ const PopularCourses = ({ popularCourses = [] }) => {
   // যদি array না হয়, তাহলে loading / error fallback
   if (!Array.isArray(popularCourses)) {
     return (
-      <section className="container mx-auto lg:mt-5 py-12 lg:py-25 px-4">
+      <section className="container mx-auto lg:mt-5 py-12 lg:py-25">
         <h2 className="text-center font-semibold text-brand-blue mb-2">
           Popular Courses
         </h2>
-        <p className="text-center text-brand-black1 font-semibold text-xl lg:text-[40px] mb-6 lg:mb-12">
+        <p className="text-center text-brand-blue font-semibold text-xl lg:text-[40px] mb-6 lg:mb-12">
           Top Picks By Learners
         </p>
         <p className="text-center text-gray-500">Loading courses...</p>
@@ -22,7 +22,7 @@ const PopularCourses = ({ popularCourses = [] }) => {
       <h2 className="text-center font-semibold text-brand-blue mb-2">
         Popular Courses
       </h2>
-      <p className="text-center text-brand-black1 font-semibold text-xl lg:text-[40px] mb-6 lg:mb-12">
+      <p className="text-center text-brand-blue font-semibold text-xl lg:text-[40px] mb-6 lg:mb-12">
         Top Picks By Learners
       </p>
 

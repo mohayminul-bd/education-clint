@@ -1,14 +1,28 @@
-import React from "react";
+import React, { useContext } from "react";
 import logoImg from "../assets/educore-logo.png";
 import { Link } from "react-router";
 import { FaFacebookF, FaLinkedinIn } from "react-icons/fa";
 import { FaXTwitter } from "react-icons/fa6";
+import { AuthContext } from "../contexts/auth/AuthContext";
 
 const Footer = () => {
+  const { darkMode } = useContext(AuthContext);
   return (
-    <div className="bg-brand-gray3 pt-12 lg:pt-20 px-4">
+    <div
+      className={`pt-12 lg:pt-20 px-4 ${
+        darkMode
+          ? " bg-gradient-to-r bg-gray-800 shadow-md rounded-lg text-white"
+          : "bg-brand-gray6 text-black"
+      }`}
+    >
       {/* Newsletter Section */}
-      <div className="container mx-auto rounded-3xl bg-gradient-to-br from-green-300 to-green-500 text-center py-10 px-6 shadow-lg">
+      <div
+        className={`container mx-auto   text-center py-10 px-6   g ${
+          darkMode
+            ? "   rounded-lg text-white"
+            : "bg-gradient-to-br from-green-300 to-green-500 text-black shadow-l rounded-3xl"
+        }`}
+      >
         <h3 className="font-bold text-2xl lg:text-4xl text-white mb-3">
           Subscribe to Our Newsletter
         </h3>
@@ -19,7 +33,7 @@ const Footer = () => {
           <input
             type="email"
             placeholder="Enter your email"
-            className="w-full flex-1 bg-white rounded-full py-3 pl-5 border border-gray-200 focus:ring-2 focus:ring-brand-blue outline-none"
+            className="w-full flex-1  rounded-full py-3 pl-5 border border-gray-200 focus:ring-2 focus:ring-brand-blue outline-none"
           />
           <button
             type="submit"
@@ -37,7 +51,7 @@ const Footer = () => {
           <img
             src={logoImg}
             alt="EduCore Official Logo"
-            className="w-36 mb-5"
+            className="w-36 mb-5 "
           />
           <p className="text-brand-gray5 mb-6 max-w-md">
             EduCore is a modern online learning platform, offering top-notch
@@ -80,10 +94,8 @@ const Footer = () => {
         {/* Right */}
         <div className="md:w-6/12 flex flex-col sm:flex-row gap-12">
           <div className="flex-1">
-            <h3 className="text-lg font-semibold text-brand-black1 mb-4">
-              Quick Links
-            </h3>
-            <ul className="space-y-2 text-brand-gray5">
+            <h3 className="text-lg font-semibold  mb-4">Quick Links</h3>
+            <ul className="space-y-2 ">
               <li>
                 <Link to="/" className="hover:text-brand-blue transition">
                   Home
@@ -113,10 +125,8 @@ const Footer = () => {
             </ul>
           </div>
           <div className="flex-1">
-            <h3 className="text-lg font-semibold text-brand-black1 mb-4">
-              Support & Info
-            </h3>
-            <ul className="space-y-2 text-brand-gray5">
+            <h3 className="text-lg font-semibold  mb-4">Support & Info</h3>
+            <ul className="space-y-2 ">
               <li>
                 <Link
                   to="/help-center"

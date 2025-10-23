@@ -1,18 +1,38 @@
-import React from "react";
+import React, { useContext } from "react";
 import useTitle from "../../hooks/useTitle";
+import { AuthContext } from "../../contexts/auth/AuthContext";
 
 const HelpCenter = () => {
   useTitle("Help Center | EduCore Learning Platform");
+  const { darkMode } = useContext(AuthContext);
+
   return (
     <>
-      <div className="bg-brand-blue py-12 px-4">
-        <div className="container mx-auto">
-          <h2 className="text-3xl font-bold text-white mb-2">Help Center</h2>
+      {/* Header Section */}
+      <div
+        className={`py-12 px-4 transition duration-300 ${
+          darkMode ? "bg-gray-800" : "bg-brand-blue"
+        }`}
+      >
+        <div className="container mx-auto text-center">
+          <h2 className="text-3xl md:text-4xl font-bold text-white mb-2">
+            Help Center
+          </h2>
+          <p className="text-white/90 text-sm md:text-base">
+            Need help? We’re here to support your learning journey.
+          </p>
         </div>
       </div>
 
-      <div className="xl:py-15 py-10 px-4">
-        <div className="container mx-auto bg-white rounded-2xl space-y-6 text-gray-700 text-base leading-relaxed">
+      {/* Main Content Section */}
+      <div className="xl:py-16 py-10 px-4 flex justify-center">
+        <div
+          className={`max-w-4xl w-full rounded-2xl shadow-lg p-6 md:p-10 space-y-6 transition duration-300 ${
+            darkMode
+              ? "bg-gradient-to-r from-gray-800  to-gray-800 text-white"
+              : "bg-white text-gray-700"
+          }`}
+        >
           <p>
             Welcome to the <strong>EduCore Help Center</strong>. We're here to
             assist you with any questions, technical issues, or guidance you may
@@ -24,13 +44,13 @@ const HelpCenter = () => {
             Here are some of the frequently asked topics we can help you with:
           </p>
 
-          <ul className="list-disc list-inside space-y-1">
+          <ul className="list-disc list-inside space-y-2 pl-2">
             <li>
               <strong>Account Issues:</strong> Trouble logging in, resetting
-              password, or updating your profile information.
+              your password, or updating your profile information.
             </li>
             <li>
-              <strong>Course Access:</strong> Can't find your enrolled courses,
+              <strong>Course Access:</strong> Can’t find your enrolled courses,
               or facing issues with course videos or materials.
             </li>
             <li>
@@ -38,8 +58,8 @@ const HelpCenter = () => {
               enroll, payment methods, or transaction failures.
             </li>
             <li>
-              <strong>Certificates:</strong> Didn't receive your certificate
-              after course completion? Let us help.
+              <strong>Certificates:</strong> Didn’t receive your certificate
+              after completing a course? Let us help.
             </li>
             <li>
               <strong>Technical Support:</strong> Site loading issues, broken
@@ -52,18 +72,26 @@ const HelpCenter = () => {
             Our support team is available to assist you 24/7.
           </p>
 
-          <p>
-            📧 Email us at <strong>support@educore.com</strong>
-            <br />
-            📞 Call us at <strong>+880-1234-567890</strong>
-            <br />
-            💬 Or chat with us using the live support button at the bottom right
-            corner of your screen.
-          </p>
+          <div
+            className={`p-5 rounded-xl border transition duration-300 ${
+              darkMode
+                ? "border-gray-500 bg-gray-700/40"
+                : "border-gray-200 bg-gray-50"
+            }`}
+          >
+            <p className="font-semibold mb-2">📞 Contact Us</p>
+            <p>
+              📧 Email: <strong>support@educore.com</strong>
+              <br />
+              ☎️ Phone: <strong>+880-1234-567890</strong>
+              <br />
+              💬 Live Chat: Use the chat icon on the bottom-right corner.
+            </p>
+          </div>
 
           <p>
-            Thank you for learning with EduCore. Your success is our priority,
-            and we're always here to help.
+            Thank you for learning with <strong>EduCore</strong>. Your success
+            is our priority, and we're always here to help.
           </p>
         </div>
       </div>

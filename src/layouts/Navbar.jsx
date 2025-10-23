@@ -1,46 +1,58 @@
-import React, { useEffect, useState } from "react";
+import React, { useContext, useEffect, useState, useRef } from "react";
 import { Link, NavLink } from "react-router";
 import logoImg from "../assets/New-folder/education2.jpeg";
 import UseAuth from "../hooks/useAuth";
 import toast from "react-hot-toast";
 import { PiUserCircleFill } from "react-icons/pi";
 import { Tooltip } from "react-tooltip";
+import { AuthContext } from "../contexts/auth/AuthContext";
+
 const Navbar = () => {
+  const { darkMode, setDarkMode } = useContext(AuthContext);
+  const { user, signOutUser } = UseAuth();
+
   const [isSticky, setIsSticky] = useState(false);
+  const [menuOpen, setMenuOpen] = useState(false);
+  const menuRef = useRef();
 
   useEffect(() => {
-    const handleScroll = () => {
-      // 80px এর বেশি স্ক্রল হলেই shadow লাগবে
-      if (window.scrollY > 80) {
-        setIsSticky(true);
-      } else {
-        setIsSticky(false);
+    const handleScroll = () => setIsSticky(window.scrollY > 80);
+    window.addEventListener("scroll", handleScroll);
+
+    const handleClickOutside = (e) => {
+      if (menuRef.current && !menuRef.current.contains(e.target)) {
+        setMenuOpen(false);
       }
     };
+    document.addEventListener("mousedown", handleClickOutside);
 
-    window.addEventListener("scroll", handleScroll);
-    return () => window.removeEventListener("scroll", handleScroll);
+    return () => {
+      window.removeEventListener("scroll", handleScroll);
+      document.removeEventListener("mousedown", handleClickOutside);
+    };
   }, []);
 
-  const { user, signOutUser } = UseAuth();
   const handleLogout = () => {
     signOutUser()
-      .then(() => {
-        toast.success("You’re now logged out. See you again soon!");
-      })
-      .catch((error) => {
-        toast(error);
-      });
+      .then(() => toast.success("You’re now logged out. See you again soon!"))
+      .catch((error) => toast.error(error.message));
   };
+
+  const scrollToTop = () => window.scrollTo({ top: 0, behavior: "smooth" });
+
   const navItems = (
     <>
       <li>
-        <NavLink to="/" className="hover:text-black">
+        <NavLink onClick={scrollToTop} to="/" className="hover:text-black">
           Home
         </NavLink>
       </li>
       <li>
-        <NavLink className="hover:text-black" to="/courses">
+        <NavLink
+          onClick={scrollToTop}
+          to="/courses"
+          className="hover:text-black"
+        >
           Courses
         </NavLink>
       </li>
@@ -53,13 +65,12 @@ const Navbar = () => {
           </li>
           <li>
             <NavLink className="hover:text-black" to="/manage-courses">
-              Manage <span className="lg:hidden xl:inline-block">Courses</span>
+              Manage Courses
             </NavLink>
           </li>
           <li>
             <NavLink className="hover:text-black" to="/my-courses">
-              Enrolled{" "}
-              <span className="lg:hidden xl:inline-block">Courses</span>
+              Enrolled Courses
             </NavLink>
           </li>
           <li>
@@ -101,76 +112,86 @@ const Navbar = () => {
 
   return (
     <div
-      className={`sticky top-0 z-50 transition-all duration-300 py-3 ${
+      className={`sticky top-0 z-50  transition-all duration-300 py-3 ${
         isSticky
           ? "bg-white/80 backdrop-blur-md shadow-md border-b border-gray-200"
           : "bg-gradient-to-r from-white via-gray-50 to-white"
       }`}
     >
-      <div className="navbar container mx-auto items-center flex">
-        <div className="navbar-start sm:w-[40%] w-full">
-          <div className="dropdown">
-            <div tabIndex={0} role="button" className="btn btn-ghost lg:hidden">
-              <svg
-                xmlns="http://www.w3.org/2000/svg"
-                className="h-5 w-5"
-                fill="none"
-                viewBox="0 0 24 24"
-                stroke="currentColor"
-              >
-                <path
-                  strokeLinecap="round"
-                  strokeLinejoin="round"
-                  strokeWidth="2"
-                  d="M4 6h16M4 12h8m-8 6h16"
-                />{" "}
-              </svg>
-            </div>
-            <ul
-              tabIndex={0}
-              className="menu menu-sm dropdown-content bg-base-100 rounded-box z-1 mt-3 w-52 p-2 shadow"
+      <div className="navbar container mx-auto flex justify-between items-center px-3 sm:px-6">
+        {/* Left side */}
+        <div className="flex items-center">
+          {/* Hamburger button */}
+          <button
+            className="lg:hidden text-gray-600 mr-2"
+            onClick={() => setMenuOpen(!menuOpen)}
+          >
+            <svg
+              xmlns="http://www.w3.org/2000/svg"
+              className="h-6 w-6"
+              fill="none"
+              viewBox="0 0 24 24"
+              stroke="currentColor"
             >
-              {navItems}
-            </ul>
-          </div>
-          <Link className="md:w-45 w-30" to="/">
+              <path
+                strokeLinecap="round"
+                strokeLinejoin="round"
+                strokeWidth="2"
+                d="M4 6h16M4 12h8m-8 6h16"
+              />
+            </svg>
+          </button>
+
+          {/* Logo */}
+          <Link onClick={scrollToTop} to="/">
             <img
-              className="md:w-45 w-30 rounded-2xl"
+              className="w-28 sm:w-36 rounded-2xl"
               src={logoImg}
-              alt="EduCare official logo"
+              alt="Education Logo"
             />
           </Link>
         </div>
-        <div className="navbar-center hidden lg:flex">
-          <ul className="menu-horizontal text-base font-medium flex flex-wrap w-fit gap-10 text-neutral-400">
+
+        {/* Center for Desktop */}
+        <div className="hidden lg:flex">
+          <ul className="flex space-x-10 text-base font-medium text-gray-500">
             {navItems}
           </ul>
         </div>
-        <div className="navbar-end gap-3 hidden sm:flex">
+
+        {/* Right side (Login/Logout/User/DarkMode) */}
+        <div className="flex items-center gap-3">
+          <button
+            onClick={() => setDarkMode(!darkMode)}
+            className="btn border-none shadow text-black shadow-gray-200 btn-outline btn-sm p-2 mr-2"
+          >
+            {darkMode ? "Light" : "Dark"}
+          </button>
+
           {user ? (
             <>
-              <div className="mr-1 relative group  hidden sm:block">
+              <div className="relative hidden sm:block">
                 {user.photoURL ? (
                   <img
                     src={user.photoURL}
-                    alt="Profile photo"
+                    alt="Profile"
                     data-tooltip-id="user-tooltip"
-                    className="w-10 h-10 rounded-full object-cover  cursor-pointer"
+                    className="w-10 h-10 rounded-full object-cover"
                   />
                 ) : (
                   <PiUserCircleFill
-                    size={41}
-                    className="cursor-pointer user-full-name"
+                    size={40}
                     data-tooltip-id="user-tooltip"
+                    className="cursor-pointer"
                   />
                 )}
-                <Tooltip id="user-tooltip" place="bottom" className="z-10">
+                <Tooltip id="user-tooltip" place="bottom">
                   {user?.displayName}
                 </Tooltip>
               </div>
               <button
                 onClick={handleLogout}
-                className="text-base bg-brand-blue text-white rounded-4xl border-0 font-medium py-2.5 px-8 hover:bg-blue-700 cursor-pointer"
+                className="hidden sm:block text-white bg-blue-600 hover:bg-blue-700 rounded-full px-5 py-2 font-medium"
               >
                 Logout
               </button>
@@ -179,13 +200,13 @@ const Navbar = () => {
             <>
               <Link
                 to="/login"
-                className="text-base rounded-4xl border-0 font-medium py-2.5 px-4"
+                className="hidden sm:block text-base rounded-full border-0 font-medium py-2 px-4"
               >
                 Login
               </Link>
               <Link
                 to="/register"
-                className="text-base bg-brand-blue text-white rounded-4xl border-0 font-medium py-2.5 px-8 hover:bg-blue-700"
+                className="hidden sm:block text-base bg-blue-600 text-white rounded-full py-2 px-6 hover:bg-blue-700"
               >
                 Register
               </Link>
@@ -193,6 +214,18 @@ const Navbar = () => {
           )}
         </div>
       </div>
+
+      {/* Fullscreen Blur Menu for Mobile */}
+      {menuOpen && (
+        <div
+          ref={menuRef}
+          className="fixed inset-0 bg-black/30 backdrop-blur-sm flex justify-center items-start pt-24 z-40"
+        >
+          <ul className="bg-white w-[90%] max-w-md rounded-2xl p-6 shadow-lg text-center space-y-4 text-gray-700 font-medium text-lg">
+            {navItems}
+          </ul>
+        </div>
+      )}
     </div>
   );
 };
