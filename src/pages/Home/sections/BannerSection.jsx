@@ -82,7 +82,7 @@ const BannerSection = () => {
                 backgroundImage: `url(${slide.image})`,
               }}
             >
-              <div className="w-full h-full bg-black/50 flex justify-center items-center text-center px-4">
+              <div className="w-full h-full bg-black/50 flex justify-center items-center text-center md:px-60">
                 <motion.div
                   initial={{ opacity: 0, y: 40 }}
                   animate={{ opacity: 1, y: 0 }}

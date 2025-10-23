@@ -40,41 +40,44 @@ const Navbar = () => {
 
   const scrollToTop = () => window.scrollTo({ top: 0, behavior: "smooth" });
 
+  const navLinkClass = ({ isActive }) =>
+    `transition-all duration-200 ${
+      isActive
+        ? "text-blue-600 font-semibold border-b-2 border-blue-600 pb-1"
+        : "text-gray-500 hover:text-blue-500"
+    }`;
+
   const navItems = (
     <>
       <li>
-        <NavLink onClick={scrollToTop} to="/" className="hover:text-black">
+        <NavLink onClick={scrollToTop} to="/" className={navLinkClass}>
           Home
         </NavLink>
       </li>
       <li>
-        <NavLink
-          onClick={scrollToTop}
-          to="/courses"
-          className="hover:text-black"
-        >
+        <NavLink onClick={scrollToTop} to="/courses" className={navLinkClass}>
           Courses
         </NavLink>
       </li>
       {user ? (
         <>
           <li>
-            <NavLink className="hover:text-black" to="/add-course">
+            <NavLink to="/add-course" className={navLinkClass}>
               Add Course
             </NavLink>
           </li>
           <li>
-            <NavLink className="hover:text-black" to="/manage-courses">
+            <NavLink to="/manage-courses" className={navLinkClass}>
               Manage Courses
             </NavLink>
           </li>
           <li>
-            <NavLink className="hover:text-black" to="/my-courses">
+            <NavLink to="/my-courses" className={navLinkClass}>
               Enrolled Courses
             </NavLink>
           </li>
           <li>
-            <NavLink className="hover:text-black" to="/contact">
+            <NavLink to="/contact" className={navLinkClass}>
               Contact
             </NavLink>
           </li>
@@ -85,25 +88,29 @@ const Navbar = () => {
       ) : (
         <>
           <li>
-            <NavLink className="hover:text-black" to="/about">
+            <NavLink to="/about" className={navLinkClass}>
               About
             </NavLink>
           </li>
           <li>
-            <NavLink className="hover:text-black" to="/how-it-works">
+            <NavLink to="/how-it-works" className={navLinkClass}>
               How it Works
             </NavLink>
           </li>
           <li>
-            <NavLink className="hover:text-black" to="/contact">
+            <NavLink to="/contact" className={navLinkClass}>
               Contact
             </NavLink>
           </li>
           <li className="sm:hidden">
-            <NavLink to="/login">Login</NavLink>
+            <NavLink to="/login" className={navLinkClass}>
+              Login
+            </NavLink>
           </li>
           <li className="sm:hidden">
-            <NavLink to="/register">Register</NavLink>
+            <NavLink to="/register" className={navLinkClass}>
+              Register
+            </NavLink>
           </li>
         </>
       )}
@@ -112,7 +119,7 @@ const Navbar = () => {
 
   return (
     <div
-      className={`sticky top-0 z-50  transition-all duration-300 py-3 ${
+      className={`sticky top-0 z-50 transition-all duration-300 py-3 ${
         isSticky
           ? "bg-white/80 backdrop-blur-md shadow-md border-b border-gray-200"
           : "bg-gradient-to-r from-white via-gray-50 to-white"
@@ -154,9 +161,7 @@ const Navbar = () => {
 
         {/* Center for Desktop */}
         <div className="hidden lg:flex">
-          <ul className="flex space-x-10 text-base font-medium text-gray-500">
-            {navItems}
-          </ul>
+          <ul className="flex space-x-10 text-base font-medium">{navItems}</ul>
         </div>
 
         {/* Right side (Login/Logout/User/DarkMode) */}

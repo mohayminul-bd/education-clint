@@ -191,6 +191,9 @@ const CourseDetails = () => {
             }`}
           >
             <h3 className="text-2xl mb-3 font-semibold">Get the course</h3>
+            <h3 className="text-red-600 py-3">
+              this bank card not set it's working my project payment option
+            </h3>
             <p className="text-xl font-semibold mb-5 text-indigo-700">
               $ {price} USD
             </p>
